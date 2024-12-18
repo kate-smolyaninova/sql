@@ -134,5 +134,5 @@ module.exports = {
   Registrar,
   Booking,
   Services,
-  Cart
+  Cart,
 }

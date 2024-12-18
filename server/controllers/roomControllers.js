@@ -59,7 +59,7 @@ class RoomControllers {
   async getOne(req, res) {
     const { id } = req.params
     const room = await Room.findOne({
-      where: { id },
+      where: { room_id: id },
       // include: [
       //   {
       //     model: Room,
