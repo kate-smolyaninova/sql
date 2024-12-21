@@ -8,9 +8,9 @@ import {
   ROOM_ROUTE,
 } from './untils/consts'
 import Cart from './pages/Cart'
-import Rooms from './pages/Rooms'
+import Rooms from './pages/Rooms/Rooms'
 import RoomPage from './pages/RoomPage'
-import Auth from './pages/Auth'
+import Auth from './pages/Auth/Auth'
 
 export const authRoutes = [
   {

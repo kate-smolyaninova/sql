@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { Context } from '..'
 
 const AppRouter = () => {
-  const {user} = useContext(Context)
+  const { user } = useContext(Context)
   return (
     <Routes>
       {user.isAuth === true &&

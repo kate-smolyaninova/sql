@@ -1,0 +1,21 @@
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.linksWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.link {
+  border: 1px solid rgb(26, 26, 26);
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.link:hover {
+  background-color: rgba(26, 26, 26, 0.05);
+}
