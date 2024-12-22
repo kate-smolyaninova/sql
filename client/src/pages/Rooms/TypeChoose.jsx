@@ -10,8 +10,21 @@ const TypeChoose = () => {
   return (
     <div className={styles.chooseWrap}>
       <div className={styles.allTypes}>
-        {rooms._types.map((t) => (
-          <p key={t}>{t}</p>
+        {rooms.uniqueRoomTypes.map((type) => (
+          <button
+            className={
+              type === rooms.selectedTypes.room_type ? styles.active : ''
+            }
+            key={type}
+            onClick={() => {
+              const selectedRoom = rooms.rooms.find(
+                (room) => room.room_type === type
+              )
+              rooms.setSelectedType(selectedRoom)
+            }}
+          >
+            {type}
+          </button>
         ))}
       </div>
     </div>

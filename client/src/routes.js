@@ -1,4 +1,4 @@
-import Admin from './pages/Admin'
+import Admin from './pages/Admin/Admin'
 import {
   ADMIN_ROUTE,
   ALLROOMS_ROUTE,
@@ -9,7 +9,7 @@ import {
 } from './untils/consts'
 import Cart from './pages/Cart'
 import Rooms from './pages/Rooms/Rooms'
-import RoomPage from './pages/RoomPage'
+import RoomPage from './pages/Rooms/RoomPage'
 import Auth from './pages/Auth/Auth'
 
 export const authRoutes = [

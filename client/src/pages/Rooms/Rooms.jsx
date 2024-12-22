@@ -6,23 +6,17 @@ import { FaFilter } from 'react-icons/fa'
 
 import photo from './../../store/jordan-whitfield-sm3Ub_IJKQg-unsplash.jpg'
 import TypeChoose from './TypeChoose'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { ROOM_ROUTE } from '../../untils/consts'
 
 const Rooms = observer(() => {
   const { rooms } = useContext(Context)
   const [filter, setFilter] = useState(false)
+  const navigate = useNavigate()
 
   const handleClick = () => {
     setFilter((prev) => !prev)
-  }
-
-  const closePopup = () => {
-    setFilter(false)
-  }
-
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closePopup()
-    }
   }
 
   return (
@@ -33,21 +27,25 @@ const Rooms = observer(() => {
             <FaFilter size={24} />
           </button>
           {filter && (
-            <div className={styles.typeChoose} onClick={handleOverlayClick}>
+            <div className={styles.typeChoose} onClick={handleClick}>
               <TypeChoose />
             </div>
           )}
         </div>
         <div className={styles.cards}>
           {rooms._rooms.map((room) => (
-            <div className={styles.card} key={room.room_id}>
+            <Link
+              className={styles.card}
+              key={room.room_id}
+              to={ROOM_ROUTE + '/' + room.room_id}
+            >
               {/* <img src={room.photo} alt={`Комната ${room.room_number}`} /> */}
               <img src={photo} />
               <div className={styles.info}>
                 <p className={styles.type}>{room.room_type}</p>
                 <button>Выбрать</button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
