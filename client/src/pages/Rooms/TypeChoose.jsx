@@ -3,6 +3,7 @@ import styles from './Rooms.module.css'
 import { Context } from './../../index'
 import { observer } from 'mobx-react-lite'
 import { FaFilter } from 'react-icons/fa'
+import RoomStore from '../../store/RoomStore'
 
 const TypeChoose = () => {
   const { rooms } = useContext(Context)
@@ -13,14 +14,11 @@ const TypeChoose = () => {
         {rooms.uniqueRoomTypes.map((type) => (
           <button
             className={
-              type === rooms.selectedTypes.room_type ? styles.active : ''
+              type === rooms.selectedType ? styles.active : '' 
             }
             key={type}
             onClick={() => {
-              const selectedRoom = rooms.rooms.find(
-                (room) => room.room_type === type
-              )
-              rooms.setSelectedType(selectedRoom)
+              rooms.setSelectedType(type) 
             }}
           >
             {type}
@@ -30,4 +28,5 @@ const TypeChoose = () => {
     </div>
   )
 }
+
 export default TypeChoose

@@ -23,10 +23,12 @@ const Room = sequelize.define('room', {
   },
   room_cost: { type: DataTypes.INTEGER, allowNull: false },
   room_number: { type: DataTypes.INTEGER, allowNull: false },
+  is_booked: { type: DataTypes.BOOLEAN, defaultValue: false },
 })
 
 const Review = sequelize.define('review', {
   review_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  user_id: { type: DataTypes.INTEGER, allowNull: false },
   review_title: { type: DataTypes.STRING, allowNull: false },
   review_description: { type: DataTypes.STRING, allowNull: true },
   review_evaluation: {
@@ -64,6 +66,8 @@ const Booking = sequelize.define('booking', {
     primaryKey: true,
     autoIncrement: true,
   },
+  user_id: { type: DataTypes.INTEGER, allowNull: false },
+  room_id: { type: DataTypes.INTEGER, allowNull: false },
   booking_status: {
     type: DataTypes.ENUM(
       'Ожидает подтвержения',

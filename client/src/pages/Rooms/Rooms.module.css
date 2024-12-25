@@ -64,14 +64,15 @@ p {
   transition: box-shadow 0.5s ease;
 }
 
+.card > img {
+  width: 100%;
+  height: 250px;
+}
+
 .info {
   padding: 40px 20px 40px;
   display: flex;
   flex-direction: column;
-}
-
-.info > img {
-  width: 100%;
 }
 
 .type {
@@ -104,6 +105,9 @@ p {
   font-size: 24px;
   font-weight: 500;
   margin: 20px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .roomWrapper {
@@ -138,6 +142,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: start;
+  gap: 10px;
 
   border: 1px solid rgb(26, 26, 26);
   padding: 10px 30px;
@@ -173,7 +178,7 @@ p {
   justify-content: end;
 }
 
-.booking > button {
+.booking > div {
   color: rgb(26, 26, 26);
   border: 1px solid rgb(26, 26, 26);
   padding: 10px 20px;

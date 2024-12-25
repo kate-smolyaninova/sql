@@ -13,8 +13,8 @@ const PORT = process.env.PORT || 5000
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(fileUpload())
 app.use(express.static(path.resolve(__dirname, 'static')))
-app.use(fileUpload({}))
 app.use('/api', router)
 
 app.use(errorHandler) // errorHandler должен быть в самом конце, тк замыкающий
@@ -26,7 +26,7 @@ app.use(errorHandler) // errorHandler должен быть в самом кон
 const start = async () => {
   try {
     await sequelize.authenticate() //ф-я отвечает за подключение к БД
-    await sequelize.sync() //ф-я сверяет состояние БД со схемой данных
+    await sequelize.sync({ alter: true }) //ф-я сверяет состояние БД со схемой данных
 
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
   } catch (e) {

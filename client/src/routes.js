@@ -6,8 +6,9 @@ import {
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
   ROOM_ROUTE,
+  BOOKINGS_ROUTE,
 } from './untils/consts'
-import Cart from './pages/Cart'
+import Cart from './pages/Cart/Cart'
 import Rooms from './pages/Rooms/Rooms'
 import RoomPage from './pages/Rooms/RoomPage'
 import Auth from './pages/Auth/Auth'
@@ -20,6 +21,10 @@ export const authRoutes = [
 
   {
     path: CART_ROUTE,
+    Component: Cart,
+  },
+  {
+    path: BOOKINGS_ROUTE,
     Component: Cart,
   },
 ]

@@ -17,6 +17,7 @@ const AppRouter = () => {
         <Route key={path} path={path} element={<Component />} exact />
       ))}
       <Route path="*" element={<Navigate to={ALLROOMS_ROUTE} replace />} />
+     
     </Routes>
   )
 }

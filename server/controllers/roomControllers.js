@@ -6,11 +6,19 @@ const { where } = require('sequelize')
 
 class RoomControllers {
   async create(req, res) {
+    console.log(req.files)
     try {
       const { floor, room_type, room_cost, room_number } = req.body
       const { photo } = req.files
+
+      if (!photo) {
+        return res.status(400).json({ message: 'Фото не загружено' })
+      }
+
       let photoName = uuid.v4() + '.jpg'
-      photo.mv(path.resolve(__dirname, '..', 'static', photoName))
+
+      await photo.mv(path.resolve(__dirname, '..', 'static', photoName))
+
       const newRoom = await Room.create({
         floor,
         room_type,
@@ -18,22 +26,23 @@ class RoomControllers {
         photo: photoName,
         room_number,
       })
+
       return res.status(201).json({
         message: 'Комната успешно добавлена!',
         room: newRoom,
       })
     } catch (error) {
       console.error(error)
-      return res.status(apiError.internal('Ошибка при добавлении комнаты'))
+      return res.status(500).json({ message: 'Ошибка при добавлении комнаты' })
     }
   }
 
   async getAll(req, res) {
     let { floor, room_type, room_cost, photo, room_number, limit, page } =
       req.query
-    page = page || 1
-    limit = limit || limit
-    let offset = page * limit - limit
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 10
+    const offset = (page - 1) * limit
     let rooms
     if (!room_type && !room_cost) {
       rooms = await Room.findAndCountAll({ limit, offset })
