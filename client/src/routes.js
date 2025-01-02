@@ -7,11 +7,17 @@ import {
   REGISTRATION_ROUTE,
   ROOM_ROUTE,
   BOOKINGS_ROUTE,
+  ROOMS_TABLE,
+  USER_TABLE,
+  BOOKING_TABLE,
 } from './untils/consts'
 import Cart from './pages/Cart/Cart'
 import Rooms from './pages/Rooms/Rooms'
 import RoomPage from './pages/Rooms/RoomPage'
 import Auth from './pages/Auth/Auth'
+import RoomsTable from './pages/Rooms/RoomsTable'
+import UserTable from './pages/UserTable/UserTable'
+import BookingTable from './pages/BookingTable/BookingTable'
 
 export const authRoutes = [
   {
@@ -26,6 +32,18 @@ export const authRoutes = [
   {
     path: BOOKINGS_ROUTE,
     Component: Cart,
+  },
+  {
+    path: ROOMS_TABLE,
+    Component: RoomsTable,
+  },
+  {
+    path: USER_TABLE,
+    Component: UserTable,
+  },
+  {
+    path: BOOKING_TABLE,
+    Component: BookingTable,
   },
 ]
 

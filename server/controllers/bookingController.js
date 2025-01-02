@@ -75,21 +75,60 @@ class BookingController {
     }
   }
 
-  // async getUserBookings(req, res, next) {
-  //   const user_id = req.user.id
+  async getAll(req, res) {
+    try {
+      const bookings = await Booking.findAll()
 
-  //   try {
-  //     const bookings = await Booking.findAll({
-  //       where: { user_id: user_id },
-  //       include: [{ model: Room }],
-  //     })
+      // Создаем массив для хранения результатов
+      const bookingDetails = await Promise.all(
+        bookings.map(async (booking) => {
+          const user = await User.findOne({
+            where: { user_id: booking.user_id },
+          })
+          const room = await Room.findOne({
+            where: { room_id: booking.room_id },
+          })
 
-  //     return res.json(bookings)
-  //   } catch (e) {
-  //     console.error(e)
-  //     return next(ApiError.internal('Не удалось получить бронирования'))
-  //   }
-  // }
+          return {
+            booking_id: booking.booking_id,
+            user_email: user ? user.user_email : null,
+            room_number: room ? room.room_number : null,
+            booking_status: booking.booking_status,
+            booking_cost: booking.booking_cost,
+            settlement_date: booking.settlement_date,
+            eviction_date: booking.eviction_date,
+          }
+        })
+      )
+
+      return res.json(bookingDetails)
+    } catch (error) {
+      console.error(error)
+      return res
+        .status(500)
+        .json({ message: 'Ошибка при получении бронирований' })
+    }
+  }
+
+  async deleteBooking(req, res) {
+    const { id } = req.params
+
+    try {
+      const deletedBookings = await Booking.destroy({
+        where: { booking_id: id },
+      })
+
+      if (!deletedBookings) {
+        return res.status(404).json({ message: 'Бронирование не найдено' })
+      }
+      return res.status(200).json({ message: 'Бронирование успешно удалено' })
+    } catch (error) {
+      console.error(error)
+      return res
+        .status(500)
+        .json({ message: 'Ошибка при удалении бронирования' })
+    }
+  }
 }
 
 module.exports = new BookingController()

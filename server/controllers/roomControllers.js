@@ -77,5 +77,21 @@ class RoomControllers {
     })
     return res.json(room)
   }
+
+  async deleteRoom(req, res) {
+    const { id } = req.params
+    try {
+      const deletedRoom = await Room.destroy({
+        where: { room_id: id },
+      })
+      if (!deletedRoom) {
+        return res.status(404).json({ message: 'Комната не найдена' })
+      }
+      return res.status(200).json({ message: 'Комната успешно удалена' })
+    } catch (error) {
+      console.error(error)
+      return res.status(500).json({ message: 'Ошибка при удалении комнаты' })
+    }
+  }
 }
 module.exports = new RoomControllers()

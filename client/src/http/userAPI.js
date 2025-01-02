@@ -14,6 +14,7 @@ export const registration = async (
       user_phone,
       user_email,
       user_password,
+      // role: 'ADMIN',
       role: 'USER',
     }
   )

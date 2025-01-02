@@ -6,7 +6,7 @@ const ApiError = require('./../error/apiError')
 
 const generateJWT = (id, email, role) => {
   return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
-    expiresIn: '72h',
+    expiresIn: '336h',
   })
 }
 
@@ -59,6 +59,35 @@ class UserController {
     )
 
     return res.json({ token })
+  }
+
+  async getAllUsers(req, res) {
+    try {
+      const users = await User.findAll()
+      return res.json(users)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async deleteUser(req, res) {
+    const { id } = req.params
+
+    try {
+      const deletedUser = await User.destroy({
+        where: { user_id: id },
+      })
+
+      if (!deletedUser) {
+        return res.status(404).json({ message: 'Пользователь не найден' })
+      }
+      return res.status(200).json({ message: 'Пользователь успешно удален' })
+    } catch (err) {
+      console.error(error)
+      return res
+        .status(500)
+        .json({ message: 'Ошибка при удалении пользователя' })
+    }
   }
 }
 
